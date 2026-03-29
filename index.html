@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Human Anatomy — From Introduction to Splanchnology</title>
+<style>
+/* ═══════════════════════════════════════════════════════════
+   GLOBAL RESET & VARIABLES
+   ═══════════════════════════════════════════════════════════ */
+:root {
+  --bg: #f5f7fa;
+  --card: #ffffff;
+  --primary: #2563eb;
+  --primary-dark: #1e40af;
+  --accent: #10b981;
+  --accent2: #f59e0b;
+  --text: #1e293b;
+  --text-light: #64748b;
+  --border: #e2e8f0;
+  --sidebar-w: 290px;
+  --radius: 12px;
+  --shadow: 0 1px 3px rgba(0,0,0,.08), 0 4px 16px rgba(0,0,0,.04);
+  --shadow-hover: 0 4px 24px rgba(37,99,235,.13);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.75;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SIDEBAR NAVIGATION
+   ═══════════════════════════════════════════════════════════ */
+.sidebar {
+  position: fixed; top: 0; left: 0;
+  width: var(--sidebar-w); height: 100vh;
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  color: #cbd5e1;
+  overflow-y: auto; z-index: 100;
+  padding: 24px 0;
+  transition: transform .3s ease;
+}
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+.sidebar .logo {
+  padding: 0 24px 20px;
+  font-size: 1.15rem; font-weight: 700;
+  color: #fff; letter-spacing: -.3px;
+  border-bottom: 1px solid #334155;
+  margin-bottom: 12px;
+}
+.sidebar .logo span { color: var(--accent); }
+.sidebar nav a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 24px;
+  font-size: .875rem; color: #94a3b8;
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  transition: all .2s;
+}
+.sidebar nav a:hover,
+.sidebar nav a.active {
+  color: #fff; background: rgba(255,255,255,.05);
+  border-left-color: var(--accent);
+}
+.sidebar nav a .num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px; border-radius: 6px;
+  background: rgba(255,255,255,.07);
+  font-size: .72rem; font-weight: 700; flex-shrink: 0;
+}
+.sidebar nav .section-label {
+  padding: 16px 24px 6px;
+  font-size: .68rem; text-transform: uppercase;
+  letter-spacing: 1.2px; color: #475569; font-weight: 700;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MAIN CONTENT AREA
+   ═══════════════════════════════════════════════════════════ */
+.main { margin-left: var(--sidebar-w); padding: 40px 48px 80px; max-width: 960px; }
+.main h1 {
+  font-size: 2.2rem; font-weight: 800; margin-bottom: 8px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.main .subtitle { color: var(--text-light); font-size: 1.05rem; margin-bottom: 32px; }
+
+/* Sections */
+.section {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 36px 40px;
+  margin-bottom: 32px;
+  border: 1px solid var(--border);
+  transition: box-shadow .3s;
+}
+.section:hover { box-shadow: var(--shadow-hover); }
+.section h2 {
+  font-size: 1.55rem; font-weight: 700; color: var(--primary-dark);
+  margin-bottom: 6px; display: flex; align-items: center; gap: 12px;
+}
+.section h2 .badge {
+  display: inline-block; padding: 3px 10px; border-radius: 6px;
+  font-size: .65rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .8px;
+}
+.badge-intro  { background: #dbeafe; color: #1d4ed8; }
+.badge-osteo  { background: #fef3c7; color: #b45309; }
+.badge-arthro { background: #d1fae5; color: #047857; }
+.badge-myo    { background: #fce7f3; color: #be185d; }
+.badge-angio  { background: #fee2e2; color: #b91c1c; }
+.badge-neuro  { background: #e0e7ff; color: #4338ca; }
+.badge-splanch{ background: #ccfbf1; color: #0f766e; }
+.section h3 {
+  font-size: 1.15rem; font-weight: 700;
+  margin: 22px 0 8px; color: var(--text);
+  padding-bottom: 4px;
+  border-bottom: 2px solid var(--border);
+}
+.section h4 {
+  font-size: 1rem; font-weight: 600;
+  margin: 16px 0 6px; color: var(--primary);
+}
+.section p, .section li { font-size: .97rem; line-height: 1.8; color: #334155; }
+.section ul, .section ol { padding-left: 22px; margin: 8px 0 14px; }
+.section li { margin-bottom: 5px; }
+
+/* Key Term Highlight */
+.term {
+  display: inline; font-weight: 600; color: var(--primary-dark);
+  background: #eff6ff; padding: 1px 6px; border-radius: 4px;
+}
+
+/* Clinical Note Callout */
+.callout {
+  background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  padding: 14px 20px; margin: 16px 0;
+  font-size: .92rem;
+}
+.callout strong { color: #047857; }
+.callout-warn {
+  background: linear-gradient(135deg, #fffbeb, #fef9c3);
+  border-left-color: var(--accent2);
+}
+.callout-warn strong { color: #b45309; }
+.callout-blue {
+  background: linear-gradient(135deg, #eff6ff, #dbeafe);
+  border-left-color: var(--primary);
+}
+.callout-blue strong { color: var(--primary-dark); }
+
+/* Simple anatomy table */
+.anatomy-table {
+  width: 100%; border-collapse: collapse; margin: 14px 0 18px;
+  font-size: .9rem;
+}
+.anatomy-table th {
+  background: #f1f5f9; text-align: left; padding: 10px 14px;
+  font-weight: 700; color: var(--primary-dark);
+  border-bottom: 2px solid var(--primary);
+}
+.anatomy-table td {
+  padding: 9px 14px; border-bottom: 1px solid var(--border);
+}
+.anatomy-table tr:hover td { background: #f8fafc; }
+
+/* Progress bar at top */
+.progress-bar {
+  position: fixed; top: 0; left: var(--sidebar-w);
+  width: calc(100% - var(--sidebar-w)); height: 4px;
+  background: var(--border); z-index: 200;
+}
+.progress-bar .fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  transition: width .15s;
+}
+
+/* Mobile hamburger */
+.hamburger {
+  display: none; position: fixed; top: 14px; left: 14px;
+  z-index: 300; background: var(--primary); color: #fff;
+  border: none; border-radius: 8px; padding: 8px 12px;
+  font-size: 1.3rem; cursor: pointer;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   QUIZ / FLASHCARD COMPONENT
+   ═══════════════════════════════════════════════════════════ */
+.quiz-box {
+  background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+  border: 1px solid #c7d2fe;
+  border-radius: var(--radius);
+  padding: 22px 26px; margin: 20px 0;
+}
+.quiz-box .q { font-weight: 700; margin-bottom: 10px; color: #3730a3; }
+.quiz-box button {
+  display: block; width: 100%; text-align: left;
+  padding: 10px 16px; margin: 6px 0;
+  background: #fff; border: 1px solid #c7d2fe;
+  border-radius: 8px; cursor: pointer;
+  font-size: .9rem; transition: all .2s;
+}
+.quiz-box button:hover { background: #c7d2fe; }
+.quiz-box button.correct { background: #bbf7d0; border-color: #22c55e; }
+.quiz-box button.wrong  { background: #fecaca; border-color: #ef4444; }
+.quiz-box .feedback { margin-top: 10px; font-size: .88rem; font-weight: 600; display: none; }
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 860px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .hamburger { display: block; }
+  .main { margin-left: 0; padding: 60px 20px 60px; }
+  .progress-bar { left: 0; width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar"><div class="fill" id="progressFill"></div></div>
+
+<!-- HAMBURGER (mobile) -->
+<button class="hamburger" id="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SIDEBAR
+     ═══════════════════════════════════════════════════════════ -->
+<aside class="sidebar" id="sidebar">
+  <div class="logo">🩻 <span>Anatomy</span>Guide</div>
+  <nav>
+    <div class="section-label">Foundations</div>
+    <a href="#intro"><span class="num">01</span> Introduction to Anatomy</a>
+    <a href="#cells-tissues"><span class="num">02</span> Cells & Tissues</a>
+
+    <div class="section-label">Locomotor System</div>
+    <a href="#osteology"><span class="num">03</span> Osteology (Bones)</a>
+    <a href="#arthrology"><span class="num">04</span> Arthrology (Joints)</a>
+    <a href="#myology"><span class="num">05</span> Myology (Muscles)</a>
+
+    <div class="section-label">Circulatory & Nervous</div>
+    <a href="#angiology"><span class="num">06</span> Angiology (Vessels)</a>
+    <a href="#neurology"><span class="num">07</span> Nervous System</a>
+    <a href="#senses"><span class="num">08</span> Sense Organs</a>
+
+    <div class="section-label">Splanchnology (Viscera)</div>
+    <a href="#splanch-intro"><span class="num">09</span> Intro to Splanchnology</a>
+    <a href="#digestive"><span class="num">10</span> Digestive System</a>
+    <a href="#respiratory"><span class="num">11</span> Respiratory System</a>
+    <a href="#urinary"><span class="num">12</span> Urinary System</a>
+    <a href="#reproductive"><span class="num">13</span> Reproductive System</a>
+    <a href="#endocrine"><span class="num">14</span> Endocrine System</a>
+    <a href="#peritoneum"><span class="num">15</span> Peritoneum & Topography</a>
+
+    <div class="section-label">Review</div>
+    <a href="#quizzes"><span class="num">✓</span> Self-Test Quizzes</a>
+  </nav>
+</aside>
+
+<!-- ═══════════════════════════════════════════════════════════
+     MAIN CONTENT
+     ═══════════════════════════════════════════════════════════ -->
+<main class="main">
+
+<h1>Human Anatomy</h1>
+<p class="subtitle">A complete student guide — from the foundations of anatomy through the end of Splanchnology. Written for clarity, designed for retention.</p>
+
+<!-- ─────────────────────────────────────────────────────
+     CHAPTER 1 – INTRODUCTION
+     ───────────────────────────────────────────────────── -->
+<div class="section" id="intro">
+  <h2><span class="badge badge-intro">Chapter 1</span> Introduction to Anatomy</h2>
+
+  <h3>What Is Anatomy?</h3>
+  <p><span class="term">Anatomy</span> (Greek: <em>anatomē</em> = "cutting up") is the science of body structure and the relationships between structures. It is one of the oldest medical sciences, dating back to Hippocrates and Galen.</p>
+  <p>Anatomy is studied alongside <span class="term">Physiology</span> — the science of body functions. Structure always determines function.</p>
+
+  <h3>Branches of Anatomy</h3>
+  <table class="anatomy-table">
+    <tr><th>Branch</th><th>What It Studies</th></tr>
+    <tr><td><strong>Gross (Macroscopic) Anatomy</strong></td><td>Structures visible without a microscope — regional or systemic</td></tr>
+    <tr><td><strong>Microscopic Anatomy</strong></td><td>Cells (cytology) and tissues (histology)</td></tr>
+    <tr><td><strong>Developmental Anatomy</strong></td><td>Structural changes from fertilization to adulthood</td></tr>
+    <tr><td><strong>Embryology</strong></td><td>Prenatal development (first 8 weeks)</td></tr>
+    <tr><td><strong>Pathological Anatomy</strong></td><td>Structural changes caused by disease</td></tr>
+    <tr><td><strong>Comparative Anatomy</strong></td><td>Similarities & differences across species</td></tr>
+    <tr><td><strong>Surface Anatomy</strong></td><td>External landmarks and projections of deep structures</td></tr>
+  </table>
+
+  <h3>Anatomical Position & Terminology</h3>
+  <p>All descriptions in anatomy assume the <span class="term">standard anatomical position</span>: the body stands erect, face forward, arms at sides with palms facing forward, feet together.</p>
+
+  <h4>Directional Terms</h4>
+  <table class="anatomy-table">
+    <tr><th>Term</th><th>Meaning</th><th>Example</th></tr>
+    <tr><td>Superior (cranial)</td><td>Toward the head</td><td>The heart is superior to the diaphragm</td></tr>
+    <tr><td>Inferior (caudal)</td><td>Away from the head</td><td>The stomach is inferior to the lungs</td></tr>
+    <tr><td>Anterior (ventral)</td><td>Front of the body</td><td>The sternum is anterior to the heart</td></tr>
+    <tr><td>Posterior (dorsal)</td><td>Back of the body</td><td>The spine is posterior to the esophagus</td></tr>
+    <tr><td>Medial</td><td>Toward the midline</td><td>The ulna is medial to the radius</td></tr>
+    <tr><td>Lateral</td><td>Away from the midline</td><td>The lungs are lateral to the heart</td></tr>
+    <tr><td>Proximal</td><td>Closer to trunk (limbs)</td><td>The elbow is proximal to the wrist</td></tr>
+    <tr><td>Distal</td><td>Farther from trunk</td><td>The fingers are distal to the elbow</td></tr>
+    <tr><td>Superficial</td><td>Closer to body surface</td><td>Skin is superficial to muscle</td></tr>
+    <tr><td>Deep</td><td>Farther from surface</td><td>Bones are deep to muscles</td></tr>
+  </table>
+
+  <h4>Body Planes</h4>
+  <p><span class="term">Sagittal plane</span> — divides body into left and right. <span class="term">Frontal (coronal) plane</span> — divides into anterior and posterior. <span class="term">Transverse (horizontal) plane</span> — divides into superior and inferior.</p>
+
+  <h3>Body Cavities</h3>
+  <p>The body has two main cavities: the <span class="term">dorsal cavity</span> (cranial + vertebral) and the <span class="term">ventral cavity</span> (thoracic + abdominopelvic). The thoracic cavity contains the lungs (pleural cavities) and the heart (pericardial cavity), separated from the abdominopelvic cavity by the <span class="term">diaphragm</span>.</p>
+
+  <h4>Abdominopelvic Regions (9 Regions)</h4>
+  <table class="anatomy-table">
+    <tr><td>Right Hypochondriac</td><td>Epigastric</td><td>Left Hypochondriac</td></tr>
+    <tr><td>Right Lumbar (Lateral)</td><td>Umbilical</td><td>Left Lumbar (Lateral)</td></tr>
+    <tr><td>Right Iliac (Inguinal)</td><td>Hypogastric (Pubic)</td><td>Left Iliac (Inguinal)</td></tr>
+  </table>
+
+  <div class="callout">
+    <strong>💡 Memory Tip:</strong> Think of the 9 regions as a tic-tac-toe grid drawn on the abdomen. The two horizontal lines are the subcostal line and the intertubercular (interspinous) line.
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────
+     CHAPTER 2 – CELLS & TISSUES
+     ───────────────────────────────────────────────────── -->
+<div class="section" id="cells-tissues">
+  <h2><span class="badge badge-intro">Chapter 2</span> Cells &amp; Tissues</h2>
+
+  <h3>The Cell — Basic Unit of Life</h3>
+  <p>Every human body is composed of approximately 37 trillion cells. Each cell has a <span class="term">plasma membrane</span>, <span class="term">cytoplasm</span> (with organelles), and a <span class="term">nucleus</span> containing DNA.</p>
+
+  <h4>Key Organelles</h4>
+  <table class="anatomy-table">
+    <tr><th>Organelle</th><th>Function</th></tr>
+    <tr><td>Nucleus</td><td>Contains DNA; controls cell activity</td></tr>
+    <tr><td>Mitochondria</td><td>ATP production — "powerhouse of the cell"</td></tr>
+    <tr><td>Rough ER</td><td>Protein synthesis (has ribosomes)</td></tr>
+    <tr><td>Smooth ER</td><td>Lipid synthesis; detoxification</td></tr>
+    <tr><td>Golgi apparatus</td><td>Packages & ships proteins</td></tr>
+    <tr><td>Lysosomes</td><td>Digest waste — "recycling center"</td></tr>
+    <tr><td>Ribosomes</td><td>Translate mRNA into proteins</td></tr>
+  </table>
+
+  <h3>The Four Primary Tissue Types</h3>
+
+  <h4>1. Epithelial Tissue</h4>
+  <p>Covers body surfaces, lines cavities, and forms glands. It is <em>avascular</em> (no blood vessels) and has a high regeneration rate. Classification is by layers (simple vs. stratified) and cell shape (squamous, cuboidal, columnar).</p>
+
+  <h4>2. Connective Tissue</h4>
+  <p>The most abundant tissue. It supports, protects, and binds organs together. Examples include loose connective tissue, dense connective tissue, cartilage, bone, and blood. All connective tissues have cells embedded in an <span class="term">extracellular matrix</span>.</p>
+
+  <h4>3. Muscle Tissue</h4>
+  <p>Responsible for movement. Three types: <span class="term">skeletal</span> (voluntary, striated), <span class="term">cardiac</span> (involuntary, striated, intercalated discs), and <span class="term">smooth</span> (involuntary, non-striated, found in organ walls).</p>
+
+  <h4>4. Nervous Tissue</h4>
+  <p>Found in the brain, spinal cord, and nerves. <span class="term">Neurons</span> transmit electrical signals; <span class="term">neuroglia</span> (glial cells) support and protect neurons.</p>
+
+  <div class="callout-blue callout">
+    <strong>🔑 Key Concept:</strong> Every organ is composed of at least two (usually all four) tissue types working together. The study of tissues is called <em>histology</em>.
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────
+     CHAPTER 3 – OSTEOLOGY
+     ───────────────────────────────────────────────────── -->
+<div class="section" id="osteology">
+  <h2><span class="badge badge-osteo">Chapter 3</span> Osteology — The Skeletal System</h2>
+
+  <h3>Overview</h3>
+  <p>The adult skeleton has <span class="term">206 bones</span> divided into the <span class="term">axial skeleton</span> (80 bones — skull, vertebral column, thoracic cage) and the <span class="term">appendicular skeleton</span> (126 bones — limbs and girdles).</p>
+
+  <h3>Functions of Bone</h3>
+  <p>Support, protection (skull protects the brain, ribs protect the heart/lungs), movement (levers for muscles), mineral storage (calcium, phosphorus), blood cell formation (hematopoiesis in red marrow), and fat storage (yellow marrow).</p>
+
+  <h3>Bone Classification by Shape</h3>
+  <table class="anatomy-table">
+    <tr><th>Type</th><th>Description</th><th>Example</th></tr>
+    <tr><td>Long</td><td>Longer than wide; shaft + two ends</td><td>Femur, humerus</td></tr>
+    <tr><td>Short</td><td>Roughly cube-shaped</td><td>Carpals, tarsals</td></tr>
+    <tr><td>Flat</td><td>Thin, broad, curved</td><td>Sternum, scapula, cranial bones</td></tr>
+    <tr><td>Irregular</td><td>Complex shapes</td><td>Vertebrae, sphenoid</td></tr>
+    <tr><td>Sesamoid</td><td>Embedded in tendons</td><td>Patella</td></tr>
+  </table>
+
+  <h3>Bone Structure</h3>
+  <p>A long bone has a <span class="term">diaphysis</span> (shaft) made of compact bone surrounding a medullary cavity, and two <span class="term">epiphyses</span> (ends) made mostly of spongy (cancellous) bone covered by a thin shell of compact bone. The <span class="term">periosteum</span> is a fibrous membrane covering the outer surface. The <span class="term">endosteum</span> lines the inner surface.</p>
+  <p>The <span class="term">epiphyseal plate</span> (growth plate) between the diaphysis and epiphysis is where longitudinal bone growth occurs in children. In adults it becomes the epiphyseal line.</p>
+
+  <h3>The Skull (22 bones)</h3>
+  <p>The <span class="term">cranium</span> (8 bones): frontal, 2 parietal, occipital, 2 temporal, sphenoid, ethmoid. The <span class="term">face</span> (14 bones): 2 maxillae, mandible, 2 zygomatic, 2 nasal, 2 lacrimal, 2 palatine, 2 inferior nasal conchae, vomer.</p>
+
+  <h3>The Vertebral Column (26 bones)</h3>
+  <p>7 cervical, 12 thoracic, 5 lumbar, 1 sacrum (5 fused), 1 coccyx (3–5 fused). The vertebral column has four curvatures: cervical lordosis, thoracic kyphosis, lumbar lordosis, and sacral kyphosis.</p>
+
+  <h3>The Thoracic Cage</h3>
+  <p>12 pairs of ribs (7 true, 3 false, 2 floating), the sternum (manubrium, body, xiphoid process), and 12 thoracic vertebrae.</p>
+
+  <h3>Upper Limb Bones</h3>
+  <p>Clavicle, scapula, humerus, radius, ulna, 8 carpals, 5 metacarpals, 14 phalanges.</p>
+
+  <h3>Lower Limb Bones</h3>
+  <p>Hip bone (ilium, ischium, pubis), femur, patella, tibia, fibula, 7 tarsals, 5 metatarsals, 14 phalanges.</p>
+
+  <div class="callout">
+    <strong>💡 Memory Aid:</strong> To remember the 8 carpal bones: <em>"Some Lovers Try Positions That They Can't Handle"</em> — Scaphoid, Lunate, Triquetrum, Pisiform, Trapezium, Trapezoid, Capitate, Hamate.
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────
+     CHAPTER 4 – ARTHROLOGY
+     ───────────────────────────────────────────────────── -->
+<div class="section" id="arthrology">
+  <h2><span class="badge badge-arthro">Chapter 4</span> Arthrology — Joints</h2>
+
+  <h3>Classification of Joints</h3>
+
+  <h4>By Structure</h4>
+  <table class="anatomy-table">
+    <tr><th>Type</th><th>Connecting Tissue</th><th>Example</th></tr>
+    <tr><td><strong>Fibrous</strong></td><td>Dense connective tissue</td><td>Sutures of skull, interosseous membrane</td></tr>
+    <tr><td><strong>Cartilaginous</strong></td><td>Cartilage (hyaline or fibro-)</td><td>Intervertebral discs, pubic symphysis</td></tr>
+    <tr><td><strong>Synovial</strong></td><td>Joint capsule with synovial fluid</td><td>Knee, shoulder, hip</td></tr>
+  </table>
+
+  <h4>By Function (Mobility)</h4>
+  <table class="anatomy-table">
+    <tr><th>Type</th><th>Movement</th><th>Example</th></tr>
+    <tr><td>Synarthrosis</td><td>Immovable</td><td>Sutures</td></tr>
+    <tr><td>Amphiarthrosis</td><td>Slightly movable</td><td>Pubic symphysis</td></tr>
+    <tr><td>Diarthrosis</td><td>Freely movable</td><td>All synovial joints</td></tr>
+  </table>
+
+  <h3>Types of Synovial Joints</h3>
+  <table class="anatomy-table">
+    <tr><th>Type</th><th>Movement</th><th>Example</th></tr>
+    <tr><td>Hinge (ginglymus)</td><td>Flexion/extension</td><td>Elbow, knee</td></tr>
+    <tr><td>Ball-and-socket</td><td>Multi-axial</td><td>Shoulder, hip</td></tr>
+    <tr><td>Pivot (trochoid)</td><td>Rotation</td><td>Atlantoaxial joint</td></tr>
+    <tr><td>Condyloid (ellipsoid)</td><td>Biaxial</td><td>Wrist (radiocarpal)</td></tr>
+    <tr><td>Saddle (sellar)</td><td>Biaxial</td><td>1st carpometacarpal (thumb)</td></tr>
+    <tr><td>Plane (gliding)</td><td>Sliding</td><td>Intercarpal joints</td></tr>
+  </table>
+
+  <h3>Movements at Joints</h3>
+  <p><span class="term">Flexion</span> (decrease angle), <span class="term">Extension</span> (increase angle), <span class="term">Abduction</span> (away from midline), <span class="term">Adduction</span> (toward midline), <span class="term">Rotation</span> (around longitudinal axis), <span class="term">Circumduction</span> (cone-shaped movement), <span class="term">Pronation</span> (palm down), <span class="term">Supination</span> (palm up), <span class="term">Inversion</span> (sole inward), <span class="term">Eversion</span> (sole outward).</p>
+
+  <div class="callout">
+    <strong>💡 Remember:</strong> "SOUPination" — you can hold a bowl of SOUP when your palm faces up (supination).
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────
+     CHAPTER 5 – MYOLOGY
+     ───────────────────────────────────────────────────── -->
+<div class="section" id="myology">
+  <h2><span class="badge badge-myo">Chapter 5</span> Myology — The Muscular System</h2>
+
+  <h3>Types of Muscle Tissue</h3>
+  <p><span class="term">Skeletal muscle</span> — voluntary, striated, attached to bones. <span class="term">Cardiac muscle</span> — involuntary, striated, only in the heart. <span class="term">Smooth muscle</span> — involuntary, non-striated, in organ walls and vessels.</p>
+
+  <h3>Skeletal Muscle Structure</h3>
+  <p>Each skeletal muscle is an organ. From outer to inner: <span class="term">epimysium</span> (wraps entire muscle) → <span class="term">perimysium</span> (wraps fascicles) → <span class="term">endomysium</span> (wraps individual fibers). Inside each fiber are <span class="term">myofibrils</span> made of sarcomeres — the functional contractile units.</p>
+
+  <h3>How Muscles Work</h3>
+  <p>Muscles have an <span class="term">origin</span> (fixed attachment) and an <span class="term">insertion</span> (movable attachment). When a muscle contracts, it pulls the insertion toward the origin. Muscles work in groups: the <span class="term">agonist</span> (prime mover) performs the action; the <span class="term">antagonist</span> opposes it; <span class="term">synergists</span> assist; and <span class="term">fixators</span> stabilize the origin.</p>
+
+  <h3>Major Muscle Groups</h3>
+
+  <h4>Head & Neck</h4>
+  <p>Muscles of facial expression (orbicularis oculi, orbicularis oris, buccinator, frontalis, zygomaticus), muscles of mastication (masseter, temporalis, medial & lateral pterygoids), sternocleidomastoid (head rotation), and the suprahyoid and infrahyoid groups.</p>
+
+  <h4>Trunk</h4>
+  <p>Anterior abdominal wall: external oblique, internal oblique, transversus abdominis, rectus abdominis (the "six-pack"). Back: erector spinae group (iliocostalis, longissimus, spinalis), trapezius, latissimus dorsi. Thorax: external & internal intercostals, diaphragm (the most important muscle of respiration).</p>
+
+  <h4>Upper Limb</h4>
+  <p>Shoulder: deltoid, rotator cuff (supraspinatus, infraspinatus, teres minor, subscapularis — "SITS"). Arm: biceps brachii (flexion), triceps brachii (extension). Forearm: flexor and extensor groups. Hand: thenar, hypothenar, lumbricals, interossei.</p>
+
+  <h4>Lower Limb</h4>
+  <p>Hip: gluteus maximus, medius, minimus, iliopsoas. Thigh: quadriceps femoris (extension), hamstrings (flexion), adductor group. Leg: tibialis anterior (dorsiflexion), gastrocnemius & soleus (plantarflexion). Foot: intrinsic muscles.</p>
+
+  <div class="callout">
+    <strong>💡 Rotator Cuff Mnemonic — "SITS":</strong> Supraspinatus, Infraspinatus, Teres minor, Subscapularis.
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────
+     CHAPTER 6 – ANGIOLOGY
+     ───────────────────────────────────────────────────── -->
+<div class="section" id="angiology">
+  <h2><span class="badge badge-angio">Chapter 6</span> Angiology — The Cardiovascular &amp; Lymphatic Systems</h2>
+
+  <h3>The Heart</h3>
+  <p>A muscular pump located in the <span class="term">mediastinum</span>, slightly left of the midline. It has 4 chambers: right atrium, right ventricle, left atrium, left ventricle. Deoxygenated blood enters the right atrium → right ventricle → pulmonary trunk → lungs. Oxygenated blood returns via pulmonary veins → left atrium → left ventricle → aorta → body.</p>
+  <p>Valves prevent backflow: <span class="term">tricuspid</span> (right AV), <span class="term">bicuspid/mitral</span> (left AV), <span class="term">pulmonary semilunar</span>, and <span class="term">aortic semilunar</span>.</p>
+  <p>The heart wall has three layers: <span class="term">endocardium</span> (inner), <span class="term">myocardium</span> (muscular middle), and <span class="term">epicardium</span> (outer, visceral pericardium).</p>
+
+  <h3>Blood Vessels</h3>
+  <table class="anatomy-table">
+    <tr><th>Vessel</th><th>Wall</th><th>Function</th></tr>
+    <tr><td>Arteries</td><td>Thick, elastic/muscular</td><td>Carry blood AWAY from heart</td></tr>
+    <tr><td>Arterioles</td><td>Thin muscular wall</td><td>Regulate blood flow to capillaries</td></tr>
+    <tr><td>Capillaries</td><td>Single-cell endothelium</td><td>Gas/nutrient exchange</td></tr>
+    <tr><td>Venules</td><td>Thin wall</td><td>Collect blood from capillaries</td></tr>
+    <tr><td>Veins</td><td>Thin wall + valves</td><td>Return blood TO heart</td></tr>
+  </table>
+
+  <h3>Major Arteries</h3>
+  <p>Aorta → ascending aorta → aortic arch (brachiocephalic trunk, left common carotid, left subclavian) → descending aorta → thoracic aorta → abdominal aorta → common iliac arteries → external & internal iliac. The celiac trunk, superior & inferior mesenteric arteries supply abdominal organs.</p>
+
+  <h3>Lymphatic System</h3>
+  <p>Consists of lymphatic vessels, lymph nodes, and lymphoid organs (spleen, thymus, tonsils). It drains excess interstitial fluid, transports dietary fats, and provides immune defense. The <span class="term">thoracic duct</span> is the largest lymphatic vessel, draining most of the body into the left subclavian vein.</p>
+
+  <div class="callout-warn callout">
+    <strong>⚠️ Clinical Note:</strong> Coronary artery disease (blockage of the coronary arteries supplying the myocardium) is the leading cause of death worldwide. The left anterior descending artery is called the "widow-maker" because its blockage is often fatal.
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────
+     CHAPTER 7 – NEUROLOGY
+     ───────────────────────────────────────────────────── -->
+<div class="section" id="neurology">
+  <h2><span class="badge badge-neuro">Chapter 7</span> The Nervous System</h2>
+
+  <h3>Divisions</h3>
+  <p><span class="term">Central Nervous System (CNS)</span>: brain + spinal cord. <span class="term">Peripheral Nervous System (PNS)</span>: cranial nerves (12 pairs) + spinal nerves (31 pairs). The PNS is further divided into a somatic (voluntary) division and an autonomic (involuntary) division. The autonomic nervous system has sympathetic ("fight or flight") and parasympathetic ("rest and digest") branches.</p>
+
+  <h3>The Neuron</h3>
+  <p>The functional unit. It has a <span class="term">cell body</span> (soma), <span class="term">dendrites</span> (receive signals), and an <span class="term">axon</span> (transmits signals). Many axons are wrapped in <span class="term">myelin sheath</span> to speed conduction. Signals pass between neurons at <span class="term">synapses</span> via neurotransmitters.</p>
+
+  <h3>The Brain</h3>
+  <table class="anatomy-table">
+    <tr><th>Region</th><th>Main Functions</th></tr>
+    <tr><td>Cerebrum (cerebral cortex)</td><td>Thought, memory, speech, sensation, voluntary movement</td></tr>
+    <tr><td>Diencephalon (thalamus, hypothalamus)</td><td>Relay center; regulates autonomic functions, hormones</td></tr>
+    <tr><td>Cerebellum</td><td>Coordination, balance, fine motor skills</td></tr>
+    <tr><td>Brainstem (midbrain, pons, medulla)</td><td>Vital reflexes: breathing, heart rate, consciousness</td></tr>
+  </table>
+
+  <h3>The 12 Cranial Nerves</h3>
+  <table class="anatomy-table">
+    <tr><th>#</th><th>Name</th><th>Function (simplified)</th></tr>
+    <tr><td>I</td><td>Olfactory</td><td>Smell</td></tr>
+    <tr><td>II</td><td>Optic</td><td>Vision</td></tr>
+    <tr><td>III</td><td>Oculomotor</td><td>Eye movement, pupil constriction</td></tr>
+    <tr><td>IV</td><td>Trochlear</td><td>Eye movement (superior oblique)</td></tr>
+    <tr><td>V</td><td>Trigeminal</td><td>Face sensation, mastication</td></tr>
+    <tr><td>VI</td><td>Abducens</td><td>Eye abduction (lateral rectus)</td></tr>
+    <tr><td>VII</td><td>Facial</td><td>Facial expression, taste (anterior ⅔ tongue)</td></tr>
+    <tr><td>VIII</td><td>Vestibulocochlear</td><td>Hearing & balance</td></tr>
+    <tr><td>IX</td><td>Glossopharyngeal</td><td>Taste (posterior ⅓ tongue), swallowing</td></tr>
+    <tr><td>X</td><td>Vagus</td><td>Parasympathetic to thorax & abdomen, voice</td></tr>
+    <tr><td>XI</td><td>Accessory (spinal)</td><td>Trapezius & sternocleidomastoid</td></tr>
+    <tr><td>XII</td><td>Hypoglossal</td><td>Tongue movement</td></tr>
+  </table>
+
+  <h3>Spinal Cord & Spinal Nerves</h3>
+  <p>The spinal cord extends from the foramen magnum to approximately L1–L2 (conus medullaris). Below that, spinal nerve roots form the <span class="term">cauda equina</span>. There are 31 pairs of spinal nerves: 8 cervical, 12 thoracic, 5 lumbar, 5 sacral, 1 coccygeal.</p>
+
+  <div class="callout">
+    <strong>💡 Cranial Nerve Mnemonic:</strong> "<em>Oh, Oh, Oh, To Touch And Feel Very Good Velvet, AH!</em>" — Olfactory, Optic, Oculomotor, Trochlear, Trigeminal, Abducens, Facial, Vestibulocochlear, Glossopharyngeal, Vagus, Accessory, Hypoglossal.
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────
+     CHAPTER 8 – SENSE ORGANS
+     ───────────────────────────────────────────────────── -->
+<div class="section" id="senses">
+  <h2><span class="badge badge-neuro">Chapter 8</span> Sense Organs (Esthesiology)</h2>
+
+  <h3>The Eye (Organ of Vision)</h3>
+  <p>The eyeball sits in the bony orbit. It has three layers: <span class="term">fibrous tunic</span> (sclera + cornea), <span class="term">vascular tunic/uvea</span> (choroid, ciliary body, iris), and <span class="term">retina</span> (photoreceptors — rods for dim light, cones for color). Light passes through the cornea → aqueous humor → pupil → lens → vitreous humor → retina. The optic nerve (CN II) carries signals to the brain.</p>
+
+  <h3>The Ear (Organ of Hearing & Balance)</h3>
+  <p>Three parts: <span class="term">External ear</span> (auricle + ear canal + tympanic membrane), <span class="term">Middle ear</span> (3 ossicles: malleus, incus, stapes — connected to inner ear via oval window), <span class="term">Inner ear</span> (cochlea for hearing; semicircular canals + vestibule for balance). The vestibulocochlear nerve (CN VIII) transmits signals.</p>
+
+  <h3>Taste &amp; Smell</h3>
+  <p><span class="term">Taste buds</span> are mainly on the tongue (papillae), detecting sweet, sour, salty, bitter, and umami. <span class="term">Olfactory receptors</span> are in the nasal cavity roof, with axons passing through the cribriform plate to the olfactory bulb (CN I).</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     S P L A N C H N O L O G Y   S E C T I O N
+     ═══════════════════════════════════════════════════════════ -->
+
+<!-- ─────────────────────────────────────────────────────
+     CHAPTER 9 – INTRO TO SPLANCHNOLOGY
+     ───────────────────────────────────────────────────── -->
+<div class="section" id="splanch-intro">
+  <h2><span class="badge badge-splanch">Chapter 9</span> Introduction to Splanchnology</h2>
+
+  <h3>What Is Splanchnology?</h3>
+  <p><span class="term">Splanchnology</span> (Greek: <em>splanchnon</em> = viscus) is the branch of anatomy dealing with the <span class="term">visceral organs</span> — organs located primarily within the thoracic, abdominal, and pelvic cavities. It encompasses five major organ systems:</p>
+  <ol>
+    <li><strong>Digestive (Alimentary) System</strong></li>
+    <li><strong>Respiratory System</strong></li>
+    <li><strong>Urinary System</strong></li>
+    <li><strong>Reproductive (Genital) System</strong></li>
+    <li><strong>Endocrine Glands</strong></li>
+  </ol>
+
+  <h3>General Principles of Visceral Organs</h3>
+  <p>Visceral organs are typically <span class="term">hollow</span> (tubular organs with a lumen — e.g., stomach, intestines) or <span class="term">parenchymatous</span> (solid organs — e.g., liver, kidneys). Hollow organs generally have a four-layered wall:</p>
+  <table class="anatomy-table">
+    <tr><th>Layer (inside → out)</th><th>Description</th></tr>
+    <tr><td><strong>Tunica mucosa</strong></td><td>Epithelium + lamina propria + muscularis mucosae. Lines the lumen. Contains glands.</td></tr>
+    <tr><td><strong>Tela submucosa</strong></td><td>Loose connective tissue with blood vessels, nerves (submucosal plexus of Meissner), glands in some organs.</td></tr>
+    <tr><td><strong>Tunica muscularis</strong></td><td>Usually two layers of smooth muscle: inner circular + outer longitudinal. Contains myenteric plexus of Auerbach between the layers.</td></tr>
+    <tr><td><strong>Tunica adventitia / serosa</strong></td><td>Adventitia = connective tissue (retroperitoneal organs). Serosa = connective tissue + mesothelium (intraperitoneal organs).</td></tr>
+  </table>
+
+  <h3>Topographic Description of Organs</h3>
+  <p>Each organ is described by three relationships:</p>
+  <ul>
+    <li><span class="term">Holotopy</span> — Location in body regions (e.g., "epigastrium")</li>
+    <li><span class="term">Skeletotopy</span> — Projection onto the skeleton (e.g., "T11–L2")</li>
+    <li><span class="term">Syntopy</span> — Relationship to neighboring organs</li>
+  </ul>
+
+  <div class="callout-blue callout">
+    <strong>🔑 Big Picture:</strong> Splanchnology ties together everything you've learned. The nervous system innervates viscera; the blood vessels supply them; muscles and bones form the cavities that house them. Everything connects.
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────
+     CHAPTER 10 – DIGESTIVE SYSTEM
+     ───────────────────────────────────────────────────── -->
+<div class="section" id="digestive">
+  <h2><span class="badge badge-splanch">Chapter 10</span> The Digestive (Alimentary) System</h2>
+
+  <p>The digestive system extends from the <strong>lips to the anus</strong> (~9 m total) and includes associated glands. Its function: ingestion, mechanical & chemical digestion, absorption, and defecation.</p>
+
+  <h3>1. Oral Cavity (Mouth)</h3>
+  <p>Divided into the <span class="term">vestibule</span> (between lips/cheeks and teeth) and the <span class="term">oral cavity proper</span> (bounded by the teeth, palate, and floor of the mouth).</p>
+  <h4>Hard &amp; Soft Palate</h4>
+  <p>The hard palate forms the bony roof (maxillae + palatine bones). The soft palate is muscular and ends in the <span class="term">uvula</span>. The palatoglossal and palatopharyngeal arches flank the <span class="term">palatine tonsils</span> in the tonsillar fossa.</p>
+  <h4>The Tongue</h4>
+  <p>A muscular organ with a root, body, and apex. The dorsal surface has papillae containing taste buds: <span class="term">filiform</span> (most numerous, no taste buds), <span class="term">fungiform</span>, <span class="term">vallate</span> (arranged in a V before the terminal sulcus), and <span class="term">foliate</span>. The <span class="term">lingual tonsil</span> lies posterior to the terminal sulcus.</p>
+  <h4>Teeth</h4>
+  <p>Children: 20 deciduous teeth. Adults: 32 permanent teeth. Each tooth has a crown (enamel), neck, and root (cementum). Inside: dentin surrounds the pulp cavity. The dental formula for permanent teeth is 2-1-2-3 per quadrant (incisors, canine, premolars, molars).</p>
+  <h4>Salivary Glands</h4>
+  <p>Three pairs of major glands: <span class="term">parotid</span> (serous, duct opens near 2nd upper molar), <span class="term">submandibular</span> (mixed, duct opens at sublingual caruncle), <span class="term">sublingual</span> (mucous, multiple ducts). Saliva contains water, mucus, and amylase for starch digestion.</p>
+
+  <h3>2. Pharynx</h3>
+  <p>A 12–14 cm musculomembranous tube behind the nasal, oral, and laryngeal cavities. Three parts: <span class="term">nasopharynx</span> (pharyngeal tonsil + auditory tube openings), <span class="term">oropharynx</span> (palatine tonsils; food & air cross here), and <span class="term">laryngopharynx</span> (piriform recesses; continues into esophagus). The tonsils form <span class="term">Waldeyer's (Pirogov's) lymphoid ring</span>.</p>
+  <p>Muscles: three constrictors (superior, middle, inferior) + three longitudinal (stylopharyngeus, salpingopharyngeus, palatopharyngeus).</p>
+
+  <h3>3. Esophagus</h3>
+  <p>A 23–25 cm muscular tube from pharynx (C6) to stomach (T11). Three parts: cervical, thoracic, abdominal. Three anatomical constrictions: pharyngeal (at origin), bronchial/aortic (at tracheal bifurcation), and diaphragmatic (at esophageal hiatus). The wall has four layers; there is no serosa — only adventitia.</p>
+  <p>The upper ⅓ has skeletal muscle, middle ⅓ is mixed, and lower ⅓ is smooth muscle.</p>
+
+  <h3>4. Stomach</h3>
+  <p>The most dilated portion of the GI tract. Located in the epigastrium and left hypochondrium (T11–L1/L2). It has a <span class="term">cardiac part</span> (entrance), <span class="term">fundus</span> (dome), <span class="term">body</span>, and <span class="term">pyloric part</span> (antrum + canal). Two curvatures: lesser (right, attached to lesser omentum) and greater (left, attached to greater omentum). Two sphincters: cardiac and pyloric.</p>
+  <p>The wall has four layers. The muscular coat has three layers (longitudinal, circular, oblique). The mucosa has gastric pits leading to gastric glands that secrete HCl, pepsinogen, mucus, and intrinsic factor.</p>
+
+  <h3>5. Small Intestine (~6–7 m)</h3>
+
+  <h4>Duodenum (25 cm)</h4>
+  <p>C-shaped, mostly retroperitoneal. Four parts: superior, descending, horizontal (inferior), ascending. The descending part receives the <span class="term">common bile duct</span> and <span class="term">pancreatic duct</span> at the major duodenal papilla (of Vater). The <span class="term">duodenojejunal flexure</span> is held by the ligament of Treitz.</p>
+
+  <h4>Jejunum &amp; Ileum</h4>
+  <p>The jejunum (upper ⅖) has thicker walls, more <span class="term">circular folds</span> (plicae circulares), and a richer blood supply. The ileum (lower ⅗) has <span class="term">Peyer's patches</span> (aggregated lymphoid follicles) and ends at the <span class="term">ileocecal valve</span>. Both are intraperitoneal, suspended by the mesentery.</p>
+  <p>The mucosa has millions of <span class="term">villi</span> (finger-like projections containing capillaries and a lacteal for fat absorption) and <span class="term">crypts of Lieberkühn</span> (intestinal glands).</p>
+
+  <h3>6. Large Intestine (~1.5 m)</h3>
+  <p>Begins at the cecum and ends at the anus. Three distinguishing features: <span class="term">taeniae coli</span> (three longitudinal muscle bands), <span class="term">haustra</span> (pouches), and <span class="term">epiploic appendages</span> (fat-filled peritoneal tags).</p>
+  <p>Parts: <span class="term">cecum</span> (with appendix) → ascending colon → right colic (hepatic) flexure → transverse colon → left colic (splenic) flexure → descending colon → sigmoid colon → rectum → anal canal → anus.</p>
+  <p>The rectum has transverse rectal folds and ends in the anal canal with <span class="term">anal columns</span>, anal valves, and two sphincters: internal (smooth muscle, involuntary) and external (skeletal muscle, voluntary).</p>
+
+  <h3>7. Liver (Hepar)</h3>
+  <p>The largest gland (~1.5 kg). Located in the right hypochondrium and epigastrium. Two surfaces: diaphragmatic (smooth) and visceral (with impressions). The <span class="term">porta hepatis</span> on the visceral surface transmits the portal vein, hepatic artery, and common hepatic duct. Four lobes: right, left, caudate, quadrate. The functional unit is the <span class="term">hepatic lobule</span>, with a central vein and peripheral portal triads.</p>
+  <p>Ligaments: falciform, coronary, right & left triangular, round ligament (ligamentum teres — remnant of umbilical vein), ligamentum venosum.</p>
+
+  <h3>8. Gallbladder</h3>
+  <p>A pear-shaped reservoir (30–50 mL) on the visceral surface of the liver. Parts: fundus, body, infundibulum, neck. The neck continues as the <span class="term">cystic duct</span>, which joins the <span class="term">common hepatic duct</span> to form the <span class="term">common bile duct</span> (ductus choledochus). The common bile duct opens with the pancreatic duct at the major duodenal papilla, controlled by the <span class="term">sphincter of Oddi</span>.</p>
+
+  <h3>9. Pancreas</h3>
+  <p>A retroperitoneal organ (~15 cm). Parts: head (in the duodenal curve), uncinate process, neck, body, tail (reaches the spleen). The main <span class="term">pancreatic duct</span> (of Wirsung) opens at the major duodenal papilla; the accessory duct (of Santorini) opens at the minor papilla. The pancreas is both exocrine (digestive enzymes) and endocrine (islets of Langerhans — insulin & glucagon).</p>
+
+  <div class="callout-warn callout">
+    <strong>⚠️ Clinical Note:</strong> Appendicitis is inflammation of the appendix. McBurney's point (⅓ of the way from the right anterior superior iliac spine to the umbilicus) is the classic point of maximum tenderness.
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────
+     CHAPTER 11 – RESPIRATORY SYSTEM
+     ───────────────────────────────────────────────────── -->
+<div class="section" id="respiratory">
+  <h2><span class="badge badge-splanch">Chapter 11</span> The Respiratory System</h2>
+
+  <p>Function: supplies O₂ to blood and removes CO₂. Divided into the <strong>upper respiratory tract</strong> (nose, pharynx, larynx) and <strong>lower respiratory tract</strong> (trachea, bronchi, lungs).</p>
+
+  <h3>1. Nose &amp; Nasal Cavity</h3>
+  <p>The external nose is formed by nasal bones and cartilages. The nasal cavity is divided by the <span class="term">nasal septum</span> (perpendicular plate of ethmoid + vomer + septal cartilage). Each lateral wall has three <span class="term">conchae</span> (superior, middle, inferior) creating three meatuses that warm, moisten, and filter air. The paranasal sinuses (maxillary, frontal, ethmoid, sphenoid) drain into the meatuses.</p>
+
+  <h3>2. Larynx (Voice Box)</h3>
+  <p>Located at C3–C6. Framework of cartilages: <span class="term">thyroid</span> (largest, "Adam's apple"), <span class="term">cricoid</span> (complete ring), <span class="term">epiglottis</span> (elastic, covers glottis during swallowing), and paired <span class="term">arytenoid</span>, corniculate, and cuneiform cartilages. The <span class="term">vocal folds</span> (true vocal cords) stretch between the thyroid and arytenoid cartilages; the space between them is the <span class="term">rima glottidis</span>.</p>
+
+  <h3>3. Trachea (Windpipe)</h3>
+  <p>A 10–12 cm tube from C6 to T4–T5, supported by 16–20 C-shaped hyaline cartilage rings (open posteriorly — trachealis muscle). At the <span class="term">carina</span> (T4–T5) it bifurcates into right and left main (primary) bronchi. The right main bronchus is wider, shorter, and more vertical — foreign objects are more likely to enter it.</p>
+
+  <h3>4. Bronchial Tree</h3>
+  <p>Main bronchi → lobar (secondary) bronchi (3 right, 2 left) → segmental (tertiary) bronchi (10 per lung) → further divisions → terminal bronchioles → respiratory bronchioles → alveolar ducts → alveolar sacs → <span class="term">alveoli</span> (~300 million per lung). Gas exchange occurs at the alveoli through the extremely thin respiratory membrane.</p>
+
+  <h3>5. Lungs</h3>
+  <p>Right lung: 3 lobes (superior, middle, inferior) separated by oblique and horizontal fissures, 10 bronchopulmonary segments. Left lung: 2 lobes (superior, inferior) separated by oblique fissure, 8–10 segments, plus a cardiac notch and lingula. Each lung has an apex (above clavicle), base (on diaphragm), costal surface, and mediastinal surface with the <span class="term">hilum</span> (where bronchi, vessels, and nerves enter/exit, forming the lung root).</p>
+
+  <h3>6. Pleura</h3>
+  <p>A double-layered serous membrane: <span class="term">visceral pleura</span> (covers lung surface) and <span class="term">parietal pleura</span> (lines chest wall). Between them is the <span class="term">pleural cavity</span> containing a thin film of serous fluid that reduces friction during breathing. Negative pressure in the pleural cavity keeps the lungs expanded.</p>
+
+  <div class="callout">
+    <strong>💡 Remember:</strong> Right main bronchus = wider, shorter, more vertical → foreign bodies most commonly go RIGHT. Also: Right lung = 3 lobes, Left lung = 2 lobes (the heart takes the space).
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────
+     CHAPTER 12 – URINARY SYSTEM
+     ───────────────────────────────────────────────────── -->
+<div class="section" id="urinary">
+  <h2><span class="badge badge-splanch">Chapter 12</span> The Urinary System</h2>
+
+  <p>Function: filters blood, produces urine, maintains water/electrolyte balance, regulates blood pressure (renin), and produces erythropoietin.</p>
+
+  <h3>1. Kidneys</h3>
+  <p>Paired, bean-shaped organs (~11 × 6 × 3 cm, ~150 g each), retroperitoneal at T12–L3 (right slightly lower due to the liver). Each kidney has a fibrous capsule, perirenal fat, renal fascia, and pararenal fat.</p>
+  <p>Internally: <span class="term">cortex</span> (outer, contains glomeruli) → <span class="term">medulla</span> (inner, contains renal pyramids whose tips are the renal papillae) → <span class="term">minor calyces</span> → <span class="term">major calyces</span> → <span class="term">renal pelvis</span> → ureter. The <span class="term">hilum</span> (medial border) transmits the renal artery, renal vein, and ureter.</p>
+  <p>The functional unit is the <span class="term">nephron</span> (~1 million per kidney): renal corpuscle (glomerulus + Bowman's capsule) → proximal convoluted tubule → loop of Henle → distal convoluted tubule → collecting duct. Filtration occurs at the glomerulus; reabsorption and secretion occur along the tubule.</p>
+
+  <h3>2. Ureters</h3>
+  <p>Two muscular tubes (~25–30 cm) carrying urine from the renal pelvis to the urinary bladder by peristalsis. Each ureter has three constrictions: at the pelviureteric junction, at the crossing of the iliac vessels, and at the vesicoureteric junction (intramural part).</p>
+
+  <h3>3. Urinary Bladder</h3>
+  <p>A hollow muscular organ (capacity ~500 mL). Located behind the pubic symphysis. Its wall has the <span class="term">detrusor muscle</span> (three layers of smooth muscle). The <span class="term">trigone</span> is the smooth triangular area between the two ureteric orifices and the internal urethral orifice.</p>
+
+  <h3>4. Urethra</h3>
+  <p>Carries urine from the bladder to the exterior. In females: ~4 cm, opens anterior to the vaginal orifice. In males: ~20 cm, three parts — prostatic, membranous, and spongy (penile). The internal urethral sphincter (smooth, involuntary) and external urethral sphincter (skeletal, voluntary) control micturition.</p>
+
+  <div class="callout-warn callout">
+    <strong>⚠️ Clinical Note:</strong> Kidney stones (renal calculi) most commonly get stuck at the three ureteral constrictions, causing severe colicky pain (renal colic).
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────
+     CHAPTER 13 – REPRODUCTIVE SYSTEM
+     ───────────────────────────────────────────────────── -->
+<div class="section" id="reproductive">
+  <h2><span class="badge badge-splanch">Chapter 13</span> The Reproductive (Genital) System</h2>
+
+  <h3>Male Reproductive System</h3>
+  <h4>Testes</h4>
+  <p>Paired oval organs in the scrotum. Each testis has ~250 lobules containing <span class="term">seminiferous tubules</span> (spermatogenesis) and interstitial cells of Leydig (testosterone). Tubules → rete testis → efferent ductules → epididymis → ductus (vas) deferens.</p>
+  <h4>Spermatic Cord &amp; Ductus Deferens</h4>
+  <p>The spermatic cord contains the vas deferens, testicular artery, pampiniform venous plexus, nerves, and lymphatics. The vas deferens travels through the inguinal canal, crosses the ureter, and its terminal dilated part (ampulla) joins the duct of the seminal vesicle to form the <span class="term">ejaculatory duct</span>, which opens into the prostatic urethra.</p>
+  <h4>Accessory Glands</h4>
+  <p><span class="term">Seminal vesicles</span> (fructose-rich alkaline fluid), <span class="term">prostate gland</span> (surrounds the prostatic urethra; secretes slightly acidic fluid), <span class="term">bulbourethral glands</span> (of Cowper; pre-ejaculatory mucus).</p>
+  <h4>Penis</h4>
+  <p>Contains three cylindrical bodies of erectile tissue: two <span class="term">corpora cavernosa</span> (dorsal) and one <span class="term">corpus spongiosum</span> (ventral, contains the spongy urethra, expands distally as the glans penis).</p>
+
+  <h3>Female Reproductive System</h3>
+  <h4>Ovaries</h4>
+  <p>Paired almond-shaped organs on the lateral pelvic wall, attached by the mesovarium, ovarian ligament, and suspensory ligament. They produce oocytes and hormones (estrogen, progesterone).</p>
+  <h4>Uterine (Fallopian) Tubes</h4>
+  <p>~10 cm long. Parts: infundibulum (with fimbriae), ampulla (usual site of fertilization), isthmus, uterine (intramural) part.</p>
+  <h4>Uterus</h4>
+  <p>A pear-shaped muscular organ (~7.5 × 5 × 2.5 cm). Parts: fundus, body, isthmus, cervix (supravaginal + vaginal parts). Wall layers: <span class="term">endometrium</span> (mucosa — undergoes cyclic changes), <span class="term">myometrium</span> (thick smooth muscle), <span class="term">perimetrium</span> (serosa/peritoneum). Normal position: anteverted and anteflexed. Supported by broad, round, uterosacral, and cardinal (transverse cervical) ligaments.</p>
+  <h4>Vagina</h4>
+  <p>A fibromuscular canal (~8–10 cm) from the cervix to the vestibule. The cervix protrudes into the upper vagina, creating fornices (anterior, posterior, and two lateral). The posterior fornix is the deepest and is related to the rectouterine pouch (of Douglas).</p>
+  <h4>External Genitalia (Vulva)</h4>
+  <p>Mons pubis, labia majora, labia minora, clitoris, vestibule, vestibular (Bartholin's) glands, and vaginal orifice.</p>
+
+  <div class="callout">
+    <strong>💡 Key relationship:</strong> The ureter passes UNDER the uterine artery ("water under the bridge") — an important surgical landmark.
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────
+     CHAPTER 14 – ENDOCRINE SYSTEM
+     ───────────────────────────────────────────────────── -->
+<div class="section" id="endocrine">
+  <h2><span class="badge badge-splanch">Chapter 14</span> The Endocrine System</h2>
+
+  <p>The endocrine system consists of ductless glands that secrete <span class="term">hormones</span> directly into the bloodstream, regulating metabolism, growth, reproduction, and homeostasis.</p>
+
+  <table class="anatomy-table">
+    <tr><th>Gland</th><th>Location</th><th>Key Hormones</th></tr>
+    <tr><td><strong>Hypothalamus</strong></td><td>Diencephalon (brain)</td><td>Releasing/inhibiting hormones (GnRH, CRH, TRH, etc.)</td></tr>
+    <tr><td><strong>Pituitary (Hypophysis)</strong></td><td>Sella turcica of sphenoid</td><td>Anterior: GH, TSH, ACTH, FSH, LH, PRL. Posterior: ADH, Oxytocin</td></tr>
+    <tr><td><strong>Pineal Gland</strong></td><td>Epithalamus</td><td>Melatonin (circadian rhythms)</td></tr>
+    <tr><td><strong>Thyroid Gland</strong></td><td>Anterior neck (C5–T1)</td><td>T3, T4 (metabolism), Calcitonin (↓Ca²⁺)</td></tr>
+    <tr><td><strong>Parathyroid Glands</strong></td><td>Posterior thyroid (4 glands)</td><td>PTH (↑Ca²⁺)</td></tr>
+    <tr><td><strong>Adrenal (Suprarenal)</strong></td><td>Superior poles of kidneys</td><td>Cortex: cortisol, aldosterone, androgens. Medulla: epinephrine, norepinephrine</td></tr>
+    <tr><td><strong>Pancreatic Islets</strong></td><td>Within the pancreas</td><td>Insulin (β cells, ↓glucose), Glucagon (α cells, ↑glucose)</td></tr>
+    <tr><td><strong>Gonads</strong></td><td>Testes / Ovaries</td><td>Testosterone / Estrogen & Progesterone</td></tr>
+    <tr><td><strong>Thymus</strong></td><td>Superior mediastinum</td><td>Thymosin (T-cell maturation); largest in childhood</td></tr>
+  </table>
+
+  <h3>Thyroid Gland — Anatomy</h3>
+  <p>Two lateral lobes connected by an isthmus. Composed of follicles filled with <span class="term">colloid</span> (thyroglobulin). Parafollicular (C) cells produce calcitonin. Blood supply: superior thyroid artery (from external carotid) and inferior thyroid artery (from thyrocervical trunk). The recurrent laryngeal nerve runs close to the thyroid — surgical importance.</p>
+
+  <h3>Adrenal Glands — Anatomy</h3>
+  <p>Right is triangular, left is semilunar. Each has an outer cortex (3 zones: zona glomerulosa → aldosterone; zona fasciculata → cortisol; zona reticularis → androgens) and an inner medulla (modified sympathetic ganglion → catecholamines).</p>
+
+  <div class="callout">
+    <strong>💡 Adrenal cortex layers mnemonic — "GFR":</strong> Glomerulosa, Fasciculata, Reticularis (from outer to inner) → "Salt, Sugar, Sex" (aldosterone, cortisol, androgens).
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────
+     CHAPTER 15 – PERITONEUM & TOPOGRAPHY
+     ───────────────────────────────────────────────────── -->
+<div class="section" id="peritoneum">
+  <h2><span class="badge badge-splanch">Chapter 15</span> Peritoneum &amp; Abdominal Topography</h2>
+
+  <h3>The Peritoneum</h3>
+  <p>The largest serous membrane. <span class="term">Parietal peritoneum</span> lines the abdominal wall. <span class="term">Visceral peritoneum</span> covers organs. Between them is the <span class="term">peritoneal cavity</span> (a potential space with ~50 mL of serous fluid). In males it is a closed sac; in females it communicates with the exterior through the uterine tubes.</p>
+
+  <h3>Peritoneal Relationships of Organs</h3>
+  <table class="anatomy-table">
+    <tr><th>Relationship</th><th>Description</th><th>Examples</th></tr>
+    <tr><td><strong>Intraperitoneal</strong></td><td>Almost completely covered by visceral peritoneum</td><td>Stomach, jejunum, ileum, transverse colon, sigmoid colon, spleen, liver</td></tr>
+    <tr><td><strong>Mesoperitoneal</strong></td><td>Covered on three sides</td><td>Ascending & descending colon, cecum (variable)</td></tr>
+    <tr><td><strong>Retroperitoneal</strong></td><td>Behind the peritoneum; covered only on front</td><td>Kidneys, adrenals, aorta, IVC, pancreas (body/tail), duodenum (most), ureters</td></tr>
+  </table>
+
+  <h3>Peritoneal Folds &amp; Structures</h3>
+  <p><span class="term">Mesentery</span> — double layer of peritoneum suspending jejunum/ileum from posterior abdominal wall. <span class="term">Mesocolon</span> — suspends the transverse and sigmoid colon. <span class="term">Lesser omentum</span> — hepatogastric + hepatoduodenal ligaments (the latter contains the portal triad: portal vein, hepatic artery, bile duct). <span class="term">Greater omentum</span> — "fatty apron" hanging from the greater curvature; acts as immune policeman.</p>
+
+  <h3>Peritoneal Recesses</h3>
+  <p>The <span class="term">omental bursa</span> (lesser sac) communicates with the greater sac through the <span class="term">epiploic foramen</span> (of Winslow). The <span class="term">rectouterine pouch</span> (of Douglas) in females and the <span class="term">rectovesical pouch</span> in males are the most dependent parts of the peritoneal cavity in the erect position — fluid collects here.</p>
+
+  <div class="callout-warn callout">
+    <strong>⚠️ Clinical Note:</strong> In peritonitis (infection of the peritoneal cavity), the greater omentum often migrates to the site of infection to wall it off — earning it the nickname "the abdominal policeman."
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SELF-TEST QUIZZES
+     ═══════════════════════════════════════════════════════════ -->
+<div class="section" id="quizzes">
+  <h2><span class="badge badge-intro">Review</span> Self-Test Quizzes</h2>
+  <p>Click an answer. Green = correct, Red = wrong. Test yourself!</p>
+
+  <!-- QUIZ 1 -->
+  <div class="quiz-box" id="q1">
+    <p class="q">Q1: How many bones does the adult human skeleton have?</p>
+    <button onclick="checkAnswer('q1', this, false)">A) 196</button>
+    <button onclick="checkAnswer('q1', this, true)">B) 206</button>
+    <button onclick="checkAnswer('q1', this, false)">C) 216</button>
+    <button onclick="checkAnswer('q1', this, false)">D) 300</button>
+    <p class="feedback" id="q1-fb">✅ Correct! The adult skeleton has 206 bones: 80 axial + 126 appendicular.</p>
+  </div>
+
+  <!-- QUIZ 2 -->
+  <div class="quiz-box" id="q2">
+    <p class="q">Q2: Which layer of the digestive tract wall contains the myenteric (Auerbach's) plexus?</p>
+    <button onclick="checkAnswer('q2', this, false)">A) Mucosa</button>
+    <button onclick="checkAnswer('q2', this, false)">B) Submucosa</button>
+    <button onclick="checkAnswer('q2', this, true)">C) Muscularis (between its two layers)</button>
+    <button onclick="checkAnswer('q2', this, false)">D) Serosa</button>
+    <p class="feedback" id="q2-fb">✅ Correct! Auerbach's plexus lies between the inner circular and outer longitudinal layers of the tunica muscularis. Meissner's plexus is in the submucosa.</p>
+  </div>
+
+  <!-- QUIZ 3 -->
+  <div class="quiz-box" id="q3">
+    <p class="q">Q3: The right main bronchus is more likely to receive aspirated foreign bodies because it is:</p>
+    <button onclick="checkAnswer('q3', this, true)">A) Wider, shorter, and more vertical</button>
+    <button onclick="checkAnswer('q3', this, false)">B) Narrower and longer</button>
+    <button onclick="checkAnswer('q3', this, false)">C) More horizontal</button>
+    <button onclick="checkAnswer('q3', this, false)">D) Surrounded by more cartilage</button>
+    <p class="feedback" id="q3-fb">✅ Correct! The right main bronchus is wider, shorter, and more vertical than the left — a direct chute for foreign objects.</p>
+  </div>
+
+  <!-- QUIZ 4 -->
+  <div class="quiz-box" id="q4">
+    <p class="q">Q4: The functional unit of the kidney is the:</p>
+    <button onclick="checkAnswer('q4', this, false)">A) Renal pyramid</button>
+    <button onclick="checkAnswer('q4', this, false)">B) Calyx</button>
+    <button onclick="checkAnswer('q4', this, true)">C) Nephron</button>
+    <button onclick="checkAnswer('q4', this, false)">D) Renal pelvis</button>
+    <p class="feedback" id="q4-fb">✅ Correct! Each kidney has about 1 million nephrons, each consisting of a renal corpuscle and a tubule system.</p>
+  </div>
+
+  <!-- QUIZ 5 -->
+  <div class="quiz-box" id="q5">
+    <p class="q">Q5: Which peritoneal fold is known as the "abdominal policeman"?</p>
+    <button onclick="checkAnswer('q5', this, false)">A) Mesentery</button>
+    <button onclick="checkAnswer('q5', this, false)">B) Lesser omentum</button>
+    <button onclick="checkAnswer('q5', this, true)">C) Greater omentum</button>
+    <button onclick="checkAnswer('q5', this, false)">D) Falciform ligament</button>
+    <p class="feedback" id="q5-fb">✅ Correct! The greater omentum migrates to sites of inflammation to wall off infection.</p>
+  </div>
+
+  <!-- QUIZ 6 -->
+  <div class="quiz-box" id="q6">
+    <p class="q">Q6: The three zones of the adrenal cortex from outermost to innermost are:</p>
+    <button onclick="checkAnswer('q6', this, false)">A) Fasciculata, Reticularis, Glomerulosa</button>
+    <button onclick="checkAnswer('q6', this, true)">B) Glomerulosa, Fasciculata, Reticularis</button>
+    <button onclick="checkAnswer('q6', this, false)">C) Reticularis, Glomerulosa, Fasciculata</button>
+    <button onclick="checkAnswer('q6', this, false)">D) Glomerulosa, Reticularis, Fasciculata</button>
+    <p class="feedback" id="q6-fb">✅ Correct! GFR — "Salt, Sugar, Sex" → Aldosterone, Cortisol, Androgens.</p>
+  </div>
+
+  <!-- QUIZ 7 -->
+  <div class="quiz-box" id="q7">
+    <p class="q">Q7: Which cranial nerve provides parasympathetic innervation to most thoracic and abdominal viscera?</p>
+    <button onclick="checkAnswer('q7', this, false)">A) CN VII (Facial)</button>
+    <button onclick="checkAnswer('q7', this, false)">B) CN IX (Glossopharyngeal)</button>
+    <button onclick="checkAnswer('q7', this, true)">C) CN X (Vagus)</button>
+    <button onclick="checkAnswer('q7', this, false)">D) CN XII (Hypoglossal)</button>
+    <p class="feedback" id="q7-fb">✅ Correct! The vagus nerve (CN X) has the widest distribution of any cranial nerve, innervating structures from the pharynx down to the splenic flexure of the colon.</p>
+  </div>
+
+  <!-- QUIZ 8 -->
+  <div class="quiz-box" id="q8">
+    <p class="q">Q8: Fertilization of the ovum most commonly occurs in which part of the uterine tube?</p>
+    <button onclick="checkAnswer('q8', this, false)">A) Infundibulum</button>
+    <button onclick="checkAnswer('q8', this, true)">B) Ampulla</button>
+    <button onclick="checkAnswer('q8', this, false)">C) Isthmus</button>
+    <button onclick="checkAnswer('q8', this, false)">D) Intramural part</button>
+    <p class="feedback" id="q8-fb">✅ Correct! The ampulla is the widest and longest part of the uterine tube, and the most common site of fertilization.</p>
+  </div>
+
+</div>
+
+<!-- ─────────────────────────────────────────────────────
+     FOOTER
+     ───────────────────────────────────────────────────── -->
+<footer style="text-align:center; padding: 40px 0 20px; color: var(--text-light); font-size: .85rem;">
+  <p>🩻 <strong>AnatomyGuide</strong> — From Introduction to Splanchnology</p>
+  <p>Made for students. Study hard, stay curious.</p>
+</footer>
+
+</main>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SCRIPTS
+     ═══════════════════════════════════════════════════════════ -->
+<script>
+// ── Reading Progress Bar ──────────────────────────────────
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+});
+
+// ── Active Sidebar Highlighting ───────────────────────────
+const sections = document.querySelectorAll('.section');
+const navLinks = document.querySelectorAll('.sidebar nav a');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const id = entry.target.getAttribute('id');
+      const link = document.querySelector(`.sidebar nav a[href="#${id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-30% 0px -60% 0px' });
+
+sections.forEach(s => observer.observe(s));
+
+// ── Close sidebar on mobile after click ───────────────────
+navLinks.forEach(a => {
+  a.addEventListener('click', () => {
+    if (window.innerWidth <= 860) {
+      document.getElementById('sidebar').classList.remove('open');
+    }
+  });
+});
+
+// ── Quiz Logic ────────────────────────────────────────────
+function checkAnswer(qId, btn, isCorrect) {
+  const box = document.getElementById(qId);
+  if (box.dataset.answered) return;
+  box.dataset.answered = 'true';
+
+  const buttons = box.querySelectorAll('button');
+  buttons.forEach(b => {
+    b.disabled = true;
+    b.style.cursor = 'default';
+    b.style.opacity = '0.7';
+  });
+
+  if (isCorrect) {
+    btn.classList.add('correct');
+    btn.style.opacity = '1';
+  } else {
+    btn.classList.add('wrong');
+    btn.style.opacity = '1';
+    // Highlight the correct one
+    buttons.forEach(b => {
+      if (b.getAttribute('onclick').includes('true')) {
+        b.classList.add('correct');
+        b.style.opacity = '1';
+      }
+    });
+  }
+  document.getElementById(qId + '-fb').style.display = 'block';
+}
+</script>
+
+</body>
+</html>
